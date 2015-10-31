@@ -898,7 +898,7 @@ class scenario {
 	}
 
 	public function running() {
-		if ($this->getPID() > 0 && posix_getsid($this->getPID()) && (!file_exists('/proc/' . $this->getPID() . '/cmdline') || strpos(file_get_contents('/proc/' . $this->getPID() . '/cmdline'), 'scenario_id=' . $this->getId()) !== false)) {
+		if ($this->getPID() > 0 && posix_getsid($this->getPID()) && (!file_exists('/proc/self/cmdline') || strpos(file_get_contents('/proc/self/cmdline'), 'scenario_id=' . $this->getId()) !== false)) {
 			return true;
 		}
 		if (shell_exec('ps ax | grep -ie "scenario_id=' . $this->getId() . ' force" | grep -v ' . getmypid() . ' | grep -v grep | wc -l') > 0) {

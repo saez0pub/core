@@ -265,7 +265,7 @@ class cron {
 	 */
 	public function running() {
 		if (($this->getState() == 'run' || $this->getState() == 'stoping') && $this->getPID() > 0) {
-			if (posix_getsid($this->getPID()) && (!file_exists('/proc/' . $this->getPID() . '/cmdline') || strpos(file_get_contents('/proc/' . $this->getPID() . '/cmdline'), 'cron_id=' . $this->getId()) !== false)) {
+			if (posix_getsid($this->getPID()) && (!file_exists('/proc/self/cmdline') || strpos(file_get_contents('/proc/self/cmdline'), 'cron_id=' . $this->getId()) !== false)) {
 				return true;
 			}
 		}
